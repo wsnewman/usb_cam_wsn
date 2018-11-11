@@ -1,0 +1,20 @@
+image_width: 1920
+image_height: 1080
+camera_name: fisheye
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [860.9483130198232, 0.0, 905.1630625669396, 0.0, 849.7095623785591, 496.215018116659, 0.0, 0.0, 1.0]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.2631243588515163, 0.047740561068839206, 0.0034700630564795773, -0.004638672442275725, 0.0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [557.6856689453125, 0.0, 892.0298952142766, 0.0, 0.0, 536.3753662109375, 512.8443380272365, 0.0, 0.0, 0.0, 1.0, 0.0]

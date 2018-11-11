@@ -1,0 +1,21 @@
+<!-- load intrinsic params, extrinsic params, usb_cam driver, image_view, image_proc and
+  image_topic_to_pointcloud-->
+
+<launch>
+  <node name="camera" pkg="usb_cam" type="usb_cam_node" output="screen" >
+    <param name="video_device" value="/dev/video1" />
+    <param name="image_width" value="1920" />
+    <param name="image_height" value="1080" />
+    <param name="pixel_format" value="yuyv" />
+    <param name="camera_frame_id" value="logitech" />
+    <param name="io_method" value="mmap"/>
+    <param name="framerate" value="2" />
+    <param name="camera_name" value="logitech" />
+    <param name="camera_info_url" value="package://cam_cal/config/logitech_intrinsic.yaml"/>
+  </node>
+
+  <node name="image_proc" pkg="image_proc" type="image_proc" ns="camera" output="screen" >
+  </node>  
+  
+  </launch>
+

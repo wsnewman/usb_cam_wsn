@@ -1,0 +1,59 @@
+USB cam notes:
+ordered logitech C920 camera;
+has 1/4-20 tripod mount tapped hole
+diagonal FOV = 78deg
+focal len = 3.67
+94mm W x 24mm L x 29mm height
+
+Robot has M8 tapped holes on forearm, 30mm apart, perpendicular to J4, M8, depth 15mm
+(also M8 on humerus and M12 at base)
+
+
+located 1061.5 mm from elbow, and also 661.5mm   from elbow,
+ offset (radially) 55mm from J4 axis;...PLUS dist of focal pt from tripod mount
+ design camera mount s.t.: 55mm radially offset x (to robot's "right" from
+ base-frame view, robot in home pose) and 30mmm(?) offset y ("down" from
+ robot in home pose) and 1061.5 mm from elbow (along J4); moves w/ R joint
+ 
+ calibration poster: 42" x ???  $0.30/in  ($23 for 2m output)
+   make a checkerboard, 0.1m x 0.1m squares
+   
+model of camera on forearm:
+rosrun tf tf_echo system_ref_frame camera_link
+- Translation: [3.328, -0.100, 2.456]
+- Rotation: in Quaternion [-0.000, 0.707, 0.000, 0.707]
+            in RPY (radian) [-0.015, 1.570, -0.015]
+(don't know why 0.015 rotations; should be 0)
+
+
+ with MODEL of camera, camera info:
+ height: 480
+width: 640
+distortion_model: plumb_bob
+D: [0.0, 0.0, 0.0, 0.0, 0.0]
+K: [343.49636753580074, 0.0, 320.5, 0.0, 343.49636753580074, 240.5, 0.0, 0.0, 1.0]
+R: [1.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0]
+P: [343.49636753580074, 0.0, 320.5, -0.0, 0.0, 343.49636753580074, 240.5, 0.0, 0.0, 0.0, 1.0, 0.0]
+
+
+simu:
+roslaunch motoman_mh5020_description motoman_MH5020_on_truck_gazebo_sim.launch
+
+roslaunch mh5020_planner mh5020_cart_move_as.launch simu:=true
+
+MOVE forearm up, horizontal to ground:
+`rosrun test_jog_joints test_jog_joints`
+   and send joint 2 to 0.7854
+  
+rosrun opencv_and_pcl image_topic_to_pointcloud camera_topic:=/simple_camera/image_raw camera_info:=/simple_camera/camera_info
+ 
+ 
+ err: complains i=1164, ALWAYS (???)
+ aha!  model has camera optical axis = camera-frame x-axis;
+ try rotating +pi/2 about y-axis
+ 
+ 
+ 
+ 
+ 
+ 
